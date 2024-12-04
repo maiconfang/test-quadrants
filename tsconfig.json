@@ -21,12 +21,16 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "types": ["jasmine"], // Adiciona os tipos do Jasmine
+    "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["cypress/**/*.ts"] // Exclui os testes do Cypress da configuração padrão
 }
