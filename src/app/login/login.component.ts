@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Necessário para ngForm
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  standalone: true, // Declara que este componente é standalone
-  imports: [FormsModule, ReactiveFormsModule] // Importar FormsModule diretamente
+  standalone: true, // Declares that this component is standalone
+  imports: [FormsModule, ReactiveFormsModule, CommonModule] // Import FormsModule directly
 })
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
+  showMessage: boolean = false;
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder) { 
-    this.form = this.fb.group({}); // Inicializar como um grupo vazio
-    this.createForm(); // Criar o formulário
+    this.form = this.fb.group({}); // Initialize as an empty group
+    this.createForm(); // Create form
   }
 
   ngOnInit() {
@@ -31,7 +34,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onSubmit(form: FormGroup) { // Definir o tipo como FormGroup
-    console.log('Formulário enviado com sucesso!', form.value);
+
+  onSubmit() {
+    if (this.form.valid) {
+      this.showMessage = true;
+      this.errorMessage = '';
+      console.log('Form sent successfully!', this.form.value);
+    } else {
+      this.showMessage = false;
+      this.errorMessage = 'Please fill out both login and password fields!';
+    }
   }
+  
+
 }

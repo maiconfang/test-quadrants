@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent } from './app.component'; // Importar AppComponent standalone
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    AppComponent // Importar o AppComponent (standalone)
+    AppComponent
   ],
   providers: [],
-  bootstrap: [] // Configurar AppComponent como o ponto de entrada
+  bootstrap: []
 })
 export class AppModule { }

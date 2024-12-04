@@ -1,51 +1,48 @@
 <section class="site-container container mt-5 mb-5">
 
-  <!-- Título centralizado -->
+  <!-- Title centralized -->
   <header class="row site-heading pb-5">
     <div class="col-lg-12">
       <h1 id="login_page_title_label" class="page-header text-center">Page Login</h1>
     </div>
   </header>
 
-  <!-- Formulário centralizado -->
+  <!-- Form centralized -->
   <section class="row justify-content-center site-main">
-    <form class="form-horizontal col-md-6 col-lg-5" [formGroup]="form" (ngSubmit)="onSubmit(form)">
-      
-      <!-- Campo Login -->
+    <form class="form-horizontal col-md-6 col-lg-5" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- Field Login -->
       <div class="form-group mb-3">
         <div class="input-group">
           <span class="input-group-text"><i class="fas fa-user"></i></span>
-          <input 
-            id="login_username" 
-            type="text" 
-            class="form-control" 
-            formControlName="login" 
-            placeholder="Login">
+          <input id="login_username" type="text" class="form-control" formControlName="login" placeholder="Login">
         </div>
-        
+
       </div>
 
-      <!-- Campo Password -->
+      <!-- Field Password -->
       <div class="form-group mb-3">
         <div class="input-group">
           <span class="input-group-text"><i class="fas fa-key"></i></span>
-          <input 
-            id="login_password" 
-            type="password" 
-            class="form-control" 
-            formControlName="pass" 
-            placeholder="Password">
+          <input id="login_password" type="password" class="form-control" formControlName="pass" placeholder="Password">
         </div>
-       
+
       </div>
 
-      <!-- Botão Entrar -->
-      <button 
-        id="login_submit" 
-        type="submit" 
-        class="btn btn-primary btn-lg btn-block">
+      <!-- Button Enter -->
+      <button id="login_submit" type="submit" class="btn btn-primary btn-lg btn-block">
         Enter
       </button>
+
+      <!-- Message -->
+      <div *ngIf="showMessage" class="alert alert-success mt-3">
+        Both login and password fields have been filled out successfully!
+      </div>
+
+      <!-- Error Message -->
+      <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+        {{ errorMessage }}
+      </div>
 
     </form>
   </section>
