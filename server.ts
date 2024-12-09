@@ -1,6 +1,7 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { CommonEngine } from '@angular/ssr/node';
 import express from 'express';
+import helmet from 'helmet'; // Import Helmet package for security headers
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
 import bootstrap from './src/main.server';
@@ -14,6 +15,35 @@ export function app(): express.Express {
 
   const commonEngine = new CommonEngine();
 
+  // Security settings with Helmet
+  server.use(helmet()); // Enable all basic security headers
+
+  // Custom configuration for Content Security Policy
+  server.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'", "'unsafe-inline'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        objectSrc: ["'none'"],
+        imgSrc: ["'self'", "data:"],
+      },
+    })
+  );
+
+  // Add additional security headers
+  server.use(helmet.frameguard({ action: 'deny' })); // Prevents your page from being displayed in frames (protection against clickjacking)
+  server.use(helmet.noSniff()); // Prevents sniffing attacks
+  server.use(helmet.xssFilter()); // Enables XSS protection
+  server.use(
+    helmet.hsts({
+      maxAge: 31536000, // One year in seconds
+      includeSubDomains: true,
+      preload: true,
+    })
+  );
+
+
   server.set('view engine', 'html');
   server.set('views', browserDistFolder);
 
@@ -21,7 +51,7 @@ export function app(): express.Express {
   // server.get('/api/**', (req, res) => { });
   // Serve static files from /browser
   server.get('*.*', express.static(browserDistFolder, {
-    maxAge: '1y'
+    maxAge: '1y',
   }));
 
   // All regular routes use the Angular engine

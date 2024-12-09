@@ -22,7 +22,7 @@
       "ES2022",
       "dom"
     ],
-    "types": ["jasmine"], // Adiciona os tipos do Jasmine
+    "types": ["jasmine"], // Add Jasmine types
     "typeRoots": ["node_modules/@types"]
   },
   "angularCompilerOptions": {
@@ -32,5 +32,5 @@
     "strictTemplates": true
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["cypress/**/*.ts"] // Exclui os testes do Cypress da configuração padrão
+  "exclude": ["cypress/**/*.ts"] // Exclude Cypress tests from the default configuration
 }

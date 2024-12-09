@@ -1,7 +1,7 @@
 describe('Login Functionality', () => {
   beforeEach(() => {
-    // Visita a página de login
-    cy.visit('http://localhost:4200'); // Certifique-se de que a aplicação está rodando
+  // Visit the login page
+    cy.visit('http://localhost:4200'); // Make sure the application is running
   });
 
   it('should show an error message if login and password are empty', () => {

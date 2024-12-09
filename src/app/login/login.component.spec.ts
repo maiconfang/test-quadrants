@@ -8,7 +8,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, LoginComponent] // ReactiveFormsModule necessário para formulários reativos
+      imports: [ReactiveFormsModule, LoginComponent] // ReactiveFormsModule required for reactive forms
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
@@ -21,40 +21,40 @@ describe('LoginComponent', () => {
   });
 
   it('should show an error message if login and password fields are empty', () => {
-    // Garantir que os campos estão vazios
+    // Ensure fields are empty
     component.form.controls['login'].setValue('');
     component.form.controls['pass'].setValue('');
 
-    // Simular submissão do formulário
+    // Simulate form submission
     component.onSubmit();
 
-    // Verificar se a mensagem de erro foi definida corretamente
+    // Verify if the error message is set correctly
     expect(component.errorMessage).toBe('Please fill out both login and password fields!');
     expect(component.showMessage).toBeFalse();
   });
 
   it('should not show an error message if login and password fields are filled', () => {
-    // Preencher os campos com valores válidos
+    // Fill fields with valid values
     component.form.controls['login'].setValue('testuser');
     component.form.controls['pass'].setValue('password123');
 
-    // Simular submissão do formulário
+    // Simulate form submission
     component.onSubmit();
 
-    // Verificar se a mensagem de erro não está presente e a mensagem de sucesso é exibida
+    // Verify if the error message is not present and the success message is displayed
     expect(component.errorMessage).toBe('');
     expect(component.showMessage).toBeTrue();
   });
 
   it('should show the success message when valid credentials are submitted', () => {
-    // Preencher os campos com valores válidos
+    // Fill fields with valid values
     component.form.controls['login'].setValue('Maicon');
     component.form.controls['pass'].setValue('mypassword');
 
-    // Simular submissão do formulário
+    // Simulate form submission
     component.onSubmit();
 
-    // Verificar se a mensagem de sucesso foi exibida
+    // Verify if the success message is displayed
     expect(component.showMessage).toBeTrue();
     expect(component.errorMessage).toBe('');
     expect(component.form.controls['login'].value).toBe('Maicon');
@@ -62,25 +62,25 @@ describe('LoginComponent', () => {
   });
 
   it('should not submit if only one field is filled', () => {
-    // Preencher apenas o campo de login
+    // Fill only the login field
     component.form.controls['login'].setValue('testuser');
     component.form.controls['pass'].setValue('');
 
-    // Simular submissão do formulário
+    // Simulate form submission
     component.onSubmit();
 
-    // Verificar se a mensagem de erro foi exibida
+    // Verify if the error message is displayed
     expect(component.errorMessage).toBe('Please fill out both login and password fields!');
     expect(component.showMessage).toBeFalse();
 
-    // Preencher apenas o campo de senha
+    // Fill only the password field
     component.form.controls['login'].setValue('');
     component.form.controls['pass'].setValue('password123');
 
-    // Simular submissão do formulário
+    // Simulate form submission
     component.onSubmit();
 
-    // Verificar se a mensagem de erro foi exibida novamente
+    // Verify if the error message is displayed again
     expect(component.errorMessage).toBe('Please fill out both login and password fields!');
     expect(component.showMessage).toBeFalse();
   });
