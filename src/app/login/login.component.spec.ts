@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
 
-describe('LoginComponent', () => {
+describe('LoginComponent Test', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
@@ -84,4 +84,35 @@ describe('LoginComponent', () => {
     expect(component.errorMessage).toBe('Please fill out both login and password fields!');
     expect(component.showMessage).toBeFalse();
   });
+
+
+  // should display correct placeholder text for login and password fields
+  it('should display correct placeholder text for login and password fields', () => {
+    const loginInput: HTMLInputElement = fixture.nativeElement.querySelector('#login_username');
+    const passwordInput: HTMLInputElement = fixture.nativeElement.querySelector('#login_password');
+
+    expect(loginInput.placeholder).toBe('Login');
+    expect(passwordInput.placeholder).toBe('Password');    
+  });
+
+
+  // should initialize the form in its default state
+  it('should initialize the form in its default state', () => {
+    expect(component.form.controls['login'].value).toBe('');
+    expect(component.form.controls['pass'].value).toBe('');
+    expect(component.showMessage).toBeFalse();
+    expect(component.errorMessage).toBe('');
+  });
+
+
+  // should display icons in the input fields
+  it('should display icons in the input fields', () => {
+    const loginIcon: HTMLElement = fixture.nativeElement.querySelector('.fa-user');
+    const passwordIcon: HTMLElement = fixture.nativeElement.querySelector('.fa-key');
+    
+    expect(loginIcon).toBeTruthy();
+    expect(passwordIcon).toBeTruthy();
+  });
+
+  
 });
